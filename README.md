@@ -19,6 +19,7 @@ dynamic module without having the restart the application.
 `features/*` -> Contains features which can be downloaded on demand using the PlayCore API.
 
 Each feature has some distinctly unique characteristics.
+
 `features/kotlin` -> Feature written in Kotlin and will be available on-demand
 `features/java` -> Feature written in Java and will be available on-demand
 `features/native` -> Feature written in Kotlin using JNI  and will be available on-demand
