@@ -1,0 +1,6 @@
+include ':features:initialInstall'
+include ':features:native'
+include ':features:kotlin'
+include ':features:java'
+include ':app'
+rootProject.name = "PlayFeatureDelivery"
