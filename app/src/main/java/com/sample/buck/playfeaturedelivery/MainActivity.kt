@@ -4,9 +4,9 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.constraintlayout.widget.Group
 import com.google.android.play.core.splitinstall.*
 import com.google.android.play.core.splitinstall.model.SplitInstallSessionStatus
 
@@ -87,8 +87,8 @@ class MainActivity : BaseSplitActivity() {
 
     private lateinit var manager: SplitInstallManager
 
-    private lateinit var progress: Group
-    private lateinit var buttons: Group
+    private lateinit var progress: ViewGroup
+    private lateinit var buttons: ViewGroup
     private lateinit var progressBar: ProgressBar
     private lateinit var progressText: TextView
 
