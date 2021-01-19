@@ -149,6 +149,11 @@ class MainActivity : BaseSplitActivity() {
 
         val request = requestBuilder.build()
 
+        if (request.getModuleNames().isEmpty()) {
+            toastAndLog("All modules are already installed")
+            return
+        }
+
         manager.startInstall(request).addOnSuccessListener {
             toastAndLog("Loading ${request.moduleNames}")
         }.addOnFailureListener {
@@ -158,21 +163,37 @@ class MainActivity : BaseSplitActivity() {
 
     /** Install all features deferred. */
     private fun installAllFeaturesDeferred() {
-        manager.deferredInstall(installableModules).addOnSuccessListener {
-            toastAndLog("Deferred installation of $installableModules")
+        val currentInstallableModules = mutableListOf<String>()
+        installableModules.forEach { name ->
+            if (!manager.installedModules.contains(name)) {
+                currentInstallableModules.add(name)
+            }
+        }
+
+        if (currentInstallableModules.isEmpty()) {
+            toastAndLog("All modules are already installed")
+            return
+        }
+
+        toastAndLog("Requesting install of $currentInstallableModules modules." +
+                "This will happen at some point in the future.")
+        manager.deferredInstall(currentInstallableModules).addOnSuccessListener {
+            toastAndLog("Deferred installation of $currentInstallableModules")
         }
     }
 
     /** Request uninstall of all features. */
     private fun requestUninstall() {
-        toastAndLog("Requesting uninstall of all modules." +
+        val installedModules = manager.installedModules.toList()
+        if (installedModules.isEmpty()) {
+            toastAndLog("There is no module left to be uninstalled")
+            return
+        }
+        toastAndLog("Requesting uninstall of $installedModules modules." +
                 "This will happen at some point in the future.")
 
-        val installedModules = manager.installedModules.toList()
         manager.deferredUninstall(installedModules).addOnSuccessListener {
             toastAndLog("Uninstalling $installedModules")
-        }.addOnFailureListener {
-            toastAndLog("Failed installation of $installedModules")
         }
     }
 
