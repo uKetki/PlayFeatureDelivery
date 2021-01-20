@@ -1,6 +1,6 @@
 # PlayCore API sample
 
-This sample demonstrates usage of the PlayCore API with gradle build tool system.
+This sample demonstrates usage of the PlayCore API with gradle and buck build tool system.
 
 Read more at http://g.co/androidappbundle
 
@@ -31,21 +31,21 @@ The `AndroidManifest` files in each feature shows how to declare a feature modul
 
 <img src="screenshots/main.png" width="30%" />
 
-## Build project with Gradle
+## Build project with Gradle and Buck
 |        | **Build command**                  | **Output Path**                                  |
 |--------|------------------------------------|--------------------------------------------------|
 | Gradle | ./gradlew bundleRelease            | app/build/outputs/bundle/release/app-release.aab |
+| Buck   | ./buckw build //app:bundle_release | buck-out/gen/app/bundle_release.aab              |
 
 ## Testing dynamic delivery
-
 To test dynamic features locally use [bundletool](https://developer.android.com/studio/command-line/bundletool>bundletool) and follow the below steps:
-1. Build bundle file as mentioned in Build project with Gradle section
+1. Build bundle file as mentioned in Build project with Gradle and Buck section
 2. Build apks file: `bundletool build-apks --local-testing --bundle=<path_to_aab>  --output=<path_to_apks>`
    _Make sure to include  --local-testing flag_
 3. Connect to the device/emulator
 4. Install apks: `bundletool install-apks --apks=<path_to_apks>`
 
-_This will generate and install multiple apks on the connected device. Note the ***apk(s) generated for the dynamic features***_
+_This will generate and install multiple apks on the connected device. Note the difference between the buck and gradle generated apks._ The **gradle is generating extra apks for dynamic features** as follows, which buck is currently not supporting:
 ```
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-xxhdpi.apk"
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-master.apk"
@@ -57,4 +57,9 @@ Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_tes
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-master_2.apk"
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-x86_2.apk"
 ```
-
+The generated aab from buck contains only base module:
+```
+.
+├── BundleConfig.pb
+└── base
+```

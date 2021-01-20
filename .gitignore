@@ -21,3 +21,9 @@ Pods/
 .classpath
 .gradletasknamecache
 xcuserdata/
+
+buck-out
+.buckd
+.swp
+.okbuck/
+3rdparty
