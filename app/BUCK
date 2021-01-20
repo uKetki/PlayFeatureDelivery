@@ -204,11 +204,24 @@ export_file(
     visibility = ["PUBLIC"],
 )
 
+# Skeleton Manifest used by AndroidManifestMerger tool to merge all dynamic features AndroidManifest.
+okbuck_manifest(
+    name = "manifest_module_bin_release",
+    main_manifest = "ModuleManifest.xml",
+    min_sdk = "16",
+    target_sdk = "29",
+    package = "com.sample.buck.playfeaturedelivery",
+    version_code = "1",
+    version_name = "1.0",
+    debuggable = False,
+)
+
 # Build android bundle file
 android_bundle(
     name = "bundle_release",
     use_split_dex = True,
     manifest_skeleton = ":manifest_bin_release",
+    module_manifest_skeleton = ":manifest_module_bin_release",
     keystore = ":keystore_release",
     dex_tool = "d8",
     package_type = "release",
