@@ -3,4 +3,5 @@ include ':features:native'
 include ':features:kotlin'
 include ':features:java'
 include ':app'
+include ':tooling:kotlin:deps'
 rootProject.name = "PlayFeatureDelivery"

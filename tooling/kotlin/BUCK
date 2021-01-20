@@ -1,0 +1,36 @@
+java_binary(
+    name = "kotlin_compiler_embeddable",
+    deps = [
+        "//3rdparty/jvm/org/jetbrains/intellij/deps:trove4j.jar",
+        "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-compiler-embeddable.jar",
+    ],
+)
+
+targets = {
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-allopen.jar": "kotlin-allopen.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-android-extensions.jar": "kotlin-android-extensions.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-annotation-processing-gradle.jar": "kotlin-annotation-processing-gradle.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-daemon-embeddable.jar": "kotlin-daemon-embeddable.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-gradle-plugin-api.jar": "kotlin-gradle-plugin-api.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-gradle-plugin-model.jar": "kotlin-gradle-plugin-model.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-native-utils.jar": "kotlin-native-utils.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-reflect.jar": "kotlin-reflect.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-script-runtime.jar": "kotlin-script-runtime.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-stdlib-common.jar": "kotlin-stdlib-common.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-stdlib.jar": "kotlin-stdlib.jar",
+    "//3rdparty/jvm/org/jetbrains/kotlin:kotlin-util-io.jar": "kotlin-util-io.jar",
+    "//3rdparty/jvm/org/jetbrains:annotations.jar": "annotations.jar",
+    ":kotlin_compiler_embeddable": "kotlin-compiler-embeddable.jar",
+}
+
+cmd_list = (
+    ["mkdir -p $OUT{}; ".format("/libexec/lib")] +
+    ["cp $(location {}) $OUT{}/{};".format(target, "/libexec/lib", name) for (target, name) in targets.items()]
+)
+
+genrule(
+    name = "kotlin_home",
+    out = ".",
+    cmd = " ".join(cmd_list),
+    visibility = ["PUBLIC"],
+)

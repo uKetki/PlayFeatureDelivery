@@ -1,2 +1,4 @@
 <file:.okbuck/config/okbuck.buckconfig>
 
+[kotlin]
+    kotlin_home = //tooling/kotlin:kotlin_home

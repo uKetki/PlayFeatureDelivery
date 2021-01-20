@@ -51,6 +51,8 @@ okbuck {
     }
 
     externalDependencies {
+        enableExportedDeps = true
+        strictVisibility = false
         resolutionAction = "latest"
         allowAllVersions = [
                 "org.robolectric:android-all",
