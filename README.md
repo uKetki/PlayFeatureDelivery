@@ -1,6 +1,6 @@
 # PlayCore API sample
 
-This sample demonstrates usage of the PlayCore API.
+This sample demonstrates usage of the PlayCore API with gradle build tool system.
 
 Read more at http://g.co/androidappbundle
 
@@ -27,12 +27,34 @@ Each feature has some distinctly unique characteristics.
 
 The `AndroidManifest` files in each feature shows how to declare a feature module as part of a dynamic app.
 
-## Screenshots
+## Screenshot
 
 <img src="screenshots/main.png" width="30%" />
 
+## Build project with Gradle
+|        | **Build command**                  | **Output Path**                                  |
+|--------|------------------------------------|--------------------------------------------------|
+| Gradle | ./gradlew bundleRelease            | app/build/outputs/bundle/release/app-release.aab |
+
 ## Testing dynamic delivery
 
-To test dynamic delivery with this sample, you'll need to upload it to the Google Play Store's
-internal testing channel.
+To test dynamic features locally use [bundletool](https://developer.android.com/studio/command-line/bundletool>bundletool) and follow the below steps:
+1. Build bundle file as mentioned in Build project with Gradle section
+2. Build apks file: `bundletool build-apks --local-testing --bundle=<path_to_aab>  --output=<path_to_apks>`
+   _Make sure to include  --local-testing flag_
+3. Connect to the device/emulator
+4. Install apks: `bundletool install-apks --apks=<path_to_apks>`
+
+_This will generate and install multiple apks on the connected device. Note the ***apk(s) generated for the dynamic features***_
+```
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-xxhdpi.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-master.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/java-xxhdpi.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/java-master.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/kotlin-xxhdpi.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/kotlin-master.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-xxhdpi.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-master_2.apk"
+Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-x86_2.apk"
+```
 

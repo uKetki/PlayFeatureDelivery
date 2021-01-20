@@ -34,10 +34,10 @@ android {
 }
 
 dependencies {
-    implementation "androidx.appcompat:appcompat:${versions.appcompact}"
     implementation "androidx.core:core-ktx:${versions.ktx_core}"
+    compileOnly "org.jetbrains:annotations:${versions.annotations}"
 
+    api  "androidx.appcompat:appcompat:${versions.appcompat}"
     api "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
     api "com.google.android.play:core:${versions.playcore}"
-    api "com.google.android.material:material:${versions.material}"
 }
