@@ -35,6 +35,7 @@ android {
 
 dependencies {
     implementation "androidx.core:core-ktx:${versions.ktx_core}"
+    compileOnly "org.jetbrains:annotations:${versions.annotations}"
 
     api  "androidx.appcompat:appcompat:${versions.appcompat}"
     api "org.jetbrains.kotlin:kotlin-stdlib:${versions.kotlin}"
