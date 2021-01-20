@@ -219,9 +219,18 @@ okbuck_manifest(
 # Build android bundle file
 android_bundle(
     name = "bundle_release",
-    use_split_dex = True,
+    use_split_dex = True, # Mandatory for building dynamic features
     manifest_skeleton = ":manifest_bin_release",
+    # ----- Configuration for Dynamic feature modules: START -----
     module_manifest_skeleton = ":manifest_module_bin_release",
+    is_dynamic = True,
+    application_module_configs = {
+        "kotlin" : ["//features/kotlin:src_release"],
+        "java" : ["//features/java:src_release"],
+        "native" : ["//features/native:src_release"],
+        "initialInstall": ["//features/initialInstall:src_release"],
+    },
+    # ------- Configuration for Dynamic feature modules: END ------
     keystore = ":keystore_release",
     dex_tool = "d8",
     package_type = "release",
@@ -236,9 +245,5 @@ android_bundle(
     deps = [
         ":res_release",
         ":src_release",
-        "//features/native:src_release",
-        "//features/kotlin:src_release",
-        "//features/java:src_release",
-        "//features/initialInstall:src_release",
     ],
 )
