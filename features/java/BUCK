@@ -28,7 +28,6 @@ okbuck_android_module(
     target = "7",
     provided_deps = [
         "//.okbuck/workspace/d8:rt-stub.jar",
-        "//3rdparty/jvm/org/jetbrains:annotations.jar",
     ],
     disable_lint = True,
     package = "com.sample.buck.playfeaturedelivery.ondemand.java",
@@ -105,7 +104,6 @@ okbuck_android_module(
     target = "7",
     provided_deps = [
         "//.okbuck/workspace/d8:rt-stub.jar",
-        "//3rdparty/jvm/org/jetbrains:annotations.jar",
     ],
     disable_lint = True,
     package = "com.sample.buck.playfeaturedelivery.ondemand.java",

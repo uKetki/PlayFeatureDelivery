@@ -29,7 +29,6 @@ okbuck_kotlin_android_module(
     target = "7",
     provided_deps = [
         "//.okbuck/workspace/d8:rt-stub.jar",
-        "//3rdparty/jvm/org/jetbrains:annotations.jar",
     ],
     extra_kotlinc_arguments = [
         "-jvm-target",
@@ -114,7 +113,6 @@ okbuck_kotlin_android_module(
     target = "7",
     provided_deps = [
         "//.okbuck/workspace/d8:rt-stub.jar",
-        "//3rdparty/jvm/org/jetbrains:annotations.jar",
     ],
     extra_kotlinc_arguments = [
         "-jvm-target",
