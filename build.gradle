@@ -50,6 +50,15 @@ okbuck {
         customConfigFile = "tooling/jetifier/custom.config"
     }
 
+    // Override android_bundle rule to custom location
+    ruleOverrides {
+        override {
+            nativeRuleName = "android_bundle"
+            importLocation = "//tooling/buck/defs:android_bundle.bzl"
+            newRuleName = "android_bundle"
+        }
+    }
+
     externalDependencies {
         enableExportedDeps = true
         strictVisibility = false
