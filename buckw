@@ -21,6 +21,7 @@ SAVED="`pwd`"
 cd "`dirname \"$PRG\"`/" >/dev/null
 SCRIPT_DIR="`pwd -P`"
 cd "$SAVED" >/dev/null
+source "$SCRIPT_DIR/tooling/shell/import"
 
 red=`tput setaf 1 2>/dev/null || true`
 yellow=`tput setaf 3 2>/dev/null || true`
@@ -181,7 +182,7 @@ watchmanWorkflow ( ) {
 }
 
 setupBuckBinary ( ) {
-    BUCK_BINARY=$(find "$BUCK_BINARY_DIR" -name buck*.pex)
+    BUCK_BINARY=$(import_file "http://artifactory.uber.internal:4587/artifactory/java/com/uber/buck/binary/buck-java8/2d719b4f97af82ccab637442c1c18e578042adb4/buck-java8-2d719b4f97af82ccab637442c1c18e578042adb4.pex")
 
     if [[ ! -x "$BUCK_BINARY" ]]; then
         chmod +x "$BUCK_BINARY"
@@ -211,17 +212,6 @@ setupBuckRun ( ) {
     fi
 
     setupBuckBinary
-
-    # Replace kotlin_home config with full path instead of source path
-    local kotlin_home
-    kotlin_home=$("$BUCK_BINARY" audit config kotlin.kotlin_home)
-
-    if [[ "$kotlin_home" == *":kotlin_home"* ]]; then
-        echo "changing kotlin home"
-        local resolved_kotlin_home
-        resolved_kotlin_home=$("$BUCK_BINARY" build //.okbuck/workspace/kotlin_home:kotlin_home --show-output | awk '{print $2}')
-        sed -i.bak "s://.okbuck/workspace/kotlin_home\:kotlin_home:${resolved_kotlin_home}:g" .okbuck/config/okbuck.buckconfig
-    fi
 }
 
 # Handle parameters and flags

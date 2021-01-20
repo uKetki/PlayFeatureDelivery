@@ -12,6 +12,9 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven {
+            url "http://artifactory.uber.internal:4587/artifactory/java-repo"
+        }
     }
     dependencies {
         classpath 'com.uber:okbuck:0.52.1'
