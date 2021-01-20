@@ -250,3 +250,29 @@ export_file(
     mode = "reference",
     visibility = ["PUBLIC"],
 )
+
+# Build android bundle file
+android_bundle(
+    name = "bundle_release",
+    use_split_dex = True,
+    manifest_skeleton = ":manifest_bin_release",
+    keystore = ":keystore_release",
+    dex_tool = "d8",
+    package_type = "release",
+    manifest_entries = {
+        "placeholders": {
+            "applicationId": "com.sample.buck.playfeaturedelivery",
+        },
+    },
+    visibility = [
+        "PUBLIC",
+    ],
+    deps = [
+        ":res_release",
+        ":src_release",
+        "//features/native:src_release",
+        "//features/kotlin:src_release",
+        "//features/java:src_release",
+        "//features/initialInstall:src_release",
+    ],
+)
