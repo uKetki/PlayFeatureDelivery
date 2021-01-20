@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:padding="8dp"
-        android:text="@string/content_text"
+        android:text="@string/content_text_initial_install"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
 </LinearLayout>
