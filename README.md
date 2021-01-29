@@ -20,10 +20,10 @@ dynamic module without having the restart the application.
 
 Each feature has some distinctly unique characteristics.
 
-* `features/kotlin` -> Feature written in Kotlin and will be available on-demand
-* `features/java` -> Feature written in Java and will be available on-demand
-* `features/native` -> Feature written in Kotlin using JNI  and will be available on-demand
-* `features/initiallInstall` -> Feature written in Kotlin and will be available at install-time
+* `features/kotlin` -> Feature written in Kotlin and will be available **on-demand**
+* `features/java` -> Feature written in Java and will be available **on-demand**
+* `features/native` -> Feature written in Kotlin using JNI  and will be available **on-demand**
+* `features/initiallInstall` -> Feature written in Kotlin and will be available **at install-time**
 
 The `AndroidManifest` files in each feature shows how to declare a feature module as part of a dynamic app.
 
