@@ -39,6 +39,15 @@ okbuck {
         disabled = true
     }
 
+    // Override android_binary rule to custom location
+    ruleOverrides {
+        override {
+            nativeRuleName = "android_binary"
+            importLocation = "//tooling/buck/defs:android_macros.bzl"
+            newRuleName = "dfm_android_binary"
+        }
+    }
+
     jetifier {
         aarOnly = true
         exclude = [
