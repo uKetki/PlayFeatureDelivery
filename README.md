@@ -57,9 +57,27 @@ Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_tes
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-master_2.apk"
 Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-x86_2.apk"
 ```
-The generated aab from buck contains only base module:
+The generated aab from buck contains base + all dynamic module:
 ```
 .
 ├── BundleConfig.pb
-└── base
+├── base
+├── initialInstall
+├── java
+├── kotlin
+└── native
 ```
+
+## Summarizing changes
+* Modify `android_macros` file and add configurations related to dynamic features
+* Add `ModuleManifest` file to include the placeholder for `split` attribute
+
+## Troubleshooting
+To make the changes work:
+* Change `BUCK_BINARY` in `buckw` file to include the custom buck.pex path
+* While building, if you land in below error:
+    ```
+    Incorrect arguments to android_library with name src_debug: Extra unknown kwargs: extra_kotlinc_arguments
+    ```
+- Locate `.okbuck/defs/okbuck_android_modules.bzl` file
+- In `okbuck_android_module` definition add `kwargs.pop("extra_kotlinc_arguments",[])`
