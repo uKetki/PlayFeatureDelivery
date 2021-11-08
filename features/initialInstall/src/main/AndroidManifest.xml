@@ -4,11 +4,9 @@
     package="com.sample.buck.playfeaturedelivery.initialInstall">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
+        dist:onDemand="false"
         dist:title="@string/title_initial_install">
-        <dist:delivery>
-            <dist:install-time />
-        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
 

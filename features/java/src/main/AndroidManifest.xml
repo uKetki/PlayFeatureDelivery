@@ -4,11 +4,9 @@
     package="com.sample.buck.playfeaturedelivery.ondemand.java">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
+        dist:onDemand="false"
         dist:title="@string/title_java">
-        <dist:delivery>
-            <dist:on-demand />
-        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
 

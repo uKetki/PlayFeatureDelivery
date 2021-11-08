@@ -4,11 +4,9 @@
     package="com.sample.buck.playfeaturedelivery.ondemand.ccode">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
+        dist:onDemand="false"
         dist:title="@string/module_native">
-        <dist:delivery>
-            <dist:on-demand />
-        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
 

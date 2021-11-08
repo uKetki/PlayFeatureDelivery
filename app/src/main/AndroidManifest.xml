@@ -8,6 +8,9 @@
     This change will no longer be required once ManifestMerger tool is updated from Buck source code. -->
     <dist:module tools:node="removeAll"/>
 
+    <!-- To define base module as instant enabled. -->
+    <dist:module dist:instant="true"/>
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
