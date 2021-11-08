@@ -13,23 +13,19 @@ The sample contains several modules.
 The `MainActivity` class demonstrates how to use the API to load and launch features.
 
 The `BaseSplitActivity` abstract class implements the required `SplitCompat.Install()` call
-in the `attachBaseContext` method. This allow to launch an activity from a freshly downloaded
+in the `attachBaseContext` method. This allows to launch an activity from a freshly downloaded
 dynamic module without having the restart the application.
 
 `features/*` -> Contains features which can be downloaded on demand using the PlayCore API.
 
 Each feature has some distinctly unique characteristics.
 
-* `features/kotlin` -> Feature written in Kotlin and will be available **on-demand**
-* `features/java` -> Feature written in Java and will be available **on-demand**
-* `features/native` -> Feature written in Kotlin using JNI  and will be available **on-demand**
-* `features/initiallInstall` -> Feature written in Kotlin and will be available **at install-time**
+* `features/kotlin` -> Feature written in Kotlin and will be available **instantly**
+* `features/java` -> Feature written in Java and will be available **instantly**
+* `features/native` -> Feature written in Kotlin using JNI  and will be available **instantly**
+* `features/initiallInstall` -> Feature written in Kotlin and will be available **instantly**
 
-The `AndroidManifest` files in each feature shows how to declare a feature module as part of a dynamic app.
-
-## Working Demo
-
-<img src="screenshots/working_sample.gif" width="30%" />
+The `AndroidManifest` files in each feature shows how to declare a feature module as part of a instant app.
 
 ## Build project with Gradle and Buck
 |        | **Build command**                  | **Output Path**                                  |
@@ -37,22 +33,26 @@ The `AndroidManifest` files in each feature shows how to declare a feature modul
 | Gradle | ./gradlew bundleRelease            | app/build/outputs/bundle/release/app-release.aab |
 | Buck   | ./buckw build //app:bundle_release | buck-out/gen/app/bundle_release.aab              |
 
-## Testing dynamic delivery
+## Testing instant app
+To test instant app locally use [bundletool](https://developer.android.com/studio/command-line/bundletool>bundletool) and IA tool as follows:
 _**Note you can't build the bundle file manually as the changes are supported only with the custom Buck pex, which is downloaded from a protected repository._
+* Navigate to instantapps tool path: <path_to_sdk>/extras/google/instantapps
+* Create apks from aab: **bundletool build-apks --bundle=<path_to_aab> --output=<path_to_apks>**
+* ./ia run <path_to_apks>
 
-With the proposed solution **buck is generating extra apks for dynamic features** as follows, similar to AGP:
+With the proposed solution **buck is generating extra apks for instant features** as follows, similar to AGP:
 ```
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-xxhdpi.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/initialInstall-master.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/java-xxhdpi.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/java-master.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/kotlin-xxhdpi.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/kotlin-master.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-xxhdpi.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-master_2.apk"
-Pushed "/sdcard/Android/data/com.sample.buck.playfeaturedelivery/files/local_testing/native-x86_2.apk"
+INFO - Analyzing files...
+
+INFO - Checking device...
+
+INFO - Pushing instant app to device...
+
+INFO - Launching app...
+
+INFO - Instant app started
 ```
-Further, the generated aab contains all the dynamic modules:
+Further, the generated aab contains all the instant modules:
 ```
 .
 ├── BundleConfig.pb
