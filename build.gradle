@@ -35,8 +35,8 @@ allprojects {
 
 // Convert gradle project to buck by using okBuck
 okbuck {
-    target = "android-29"
-    buildToolVersion = "28.0.3"
+    target = "android-30"
+    buildToolVersion = "30.0.3"
 
     lint {
         disabled = true
